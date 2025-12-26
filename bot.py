@@ -1,6 +1,6 @@
 from loader import bot
 
-# Важно: все хендлеры импортируются после создания bot!
+# Импорт handlers
 import handlers.menu
 import handlers.qr
 import handlers.news
@@ -8,10 +8,16 @@ import handlers.faq
 import handlers.voice
 import handlers.email
 import handlers.donate
-import handlers.common_features   # здесь /start, /help, бесплатные команды
-import handlers.premium_features # здесь премиальные/лимитные команды
+import handlers.common_features
+import handlers.premium_features
 
 if __name__ == '__main__':
-    bot.remove_webhook()
-    bot.infinity_polling()
- 
+    try:
+        print("🚀 Запуск бота...")
+        bot.remove_webhook()
+        bot.infinity_polling()
+    except KeyboardInterrupt:
+        print("\n⏹️  Бот остановлен")
+    except Exception as e:
+        print(f"❌ Ошибка: {e}")
+        raise
